@@ -31,4 +31,15 @@ class Day1ApplicationTest {
         // Assert
         assertEquals(expected, result);
     }
+
+    @Test
+    void testCalculatePart2() {
+        final int expected = 5963; //5772
+
+        // Act
+        int result = Day1Application.calculatePart2();
+
+        // Assert
+        assertEquals(expected, result);
+    }
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 public class DialTurner {
     private int dialValue = 50;
+    private int encounteredZero = 0;
 
     public int turnDial(String rotation) {
         // Parsing input
@@ -12,21 +13,35 @@ public class DialTurner {
         int totalDistance = Integer.parseInt(rotation.substring(1));
 
         int relativeDistance = totalDistance % 100;
+        encounteredZero = (totalDistance / 100); // zeros encountered during full cycles
+
         if (forward) {
-            dialValue += relativeDistance;
-            if (dialValue > 99) {
-                dialValue = dialValue - 100;
-            }
+            turnDialToRight(relativeDistance);
         } else {
-            dialValue -= relativeDistance;
-            if (dialValue < 0) {
-                dialValue = 100 + dialValue;
-            }
+            turnDialToLeft(relativeDistance);
         }
 
-        System.out.println("Dial value " + dialValue + " with distance " + totalDistance);
+//        System.out.println("Dial value " + dialValue + " with distance " + totalDistance);
 
         return dialValue;
+    }
+
+    private void turnDialToLeft(int relativeDistance) {
+        int initialValue = dialValue;
+        dialValue -= relativeDistance;
+        if (dialValue < 0) {
+            if (initialValue != 0) encounteredZero++;
+            dialValue = 100 + dialValue;
+        }
+
+    }
+
+    private void turnDialToRight(int relativeDistance) {
+        dialValue += relativeDistance;
+        if (dialValue > 99) {
+            dialValue = dialValue - 100;
+            if (dialValue != 0) encounteredZero++;
+        }
     }
 
     public int crackPassword(List<String> instructions) {
@@ -34,6 +49,17 @@ public class DialTurner {
         for (String instruction : instructions) {
             turnDial(instruction);
             if (dialPointsToZero()) count++;
+        }
+
+        return count;
+    }
+
+    public int crackPasswordUsingMethod0x434(List<String> instructions) {
+        int count = 0;
+        for (String instruction : instructions) {
+            turnDial(instruction);
+            if (dialPointsToZero()) count++;
+            count += encounteredZero;
         }
 
         return count;
