@@ -2,39 +2,37 @@ package tdd11;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Queue;
 
 public class Graph {
-    private final Map<String, List<String>> map = new HashMap<>();
-    private final Map<String, Integer> cache = new HashMap<>();
+    private final Map<String, List<String>> neighboursMap = new HashMap<>();
+    private final Map<String, Long> cache = new HashMap<>();
 
     // add edge
     public void addEdge(String from, String to) {
         // Init new list if not seen this before
-        if (!map.containsKey(from)) {
-            map.put(from, new ArrayList<>());
+        if (!neighboursMap.containsKey(from)) {
+            neighboursMap.put(from, new ArrayList<>());
         }
 
-        if (!map.containsKey(to)) {
-            map.put(to, new ArrayList<>());
+        if (!neighboursMap.containsKey(to)) {
+            neighboursMap.put(to, new ArrayList<>());
         }
 
-        map.get(from).add(to);
+        neighboursMap.get(from).add(to);
     }
 
     // has edge
     public boolean hasEdge(String start, String end) {
-        List<String> nextNodes = map.get(start);
+        List<String> nextNodes = neighboursMap.get(start);
         if (nextNodes == null || nextNodes.isEmpty()) return false;
         return nextNodes.contains(end);
     }
 
     // find number of different paths - BFS or DP
-    public int getNumberOfUniquePaths(String start, String end) {
+    public long getNumberOfUniquePaths(String start, String end) {
         String key = start + "-" + end;
         if (cache.containsKey(key)) {
             return cache.get(key);
@@ -42,12 +40,12 @@ public class Graph {
 
         // Base case
         if (start.equals(end)) {
-            cache.put(key, 1);
+            cache.put(key, 1L);
             return 1;
         }
 
-        int count = 0;
-        List<String> neighbours = map.get(start);
+        long count = 0;
+        List<String> neighbours = neighboursMap.get(start);
         for (String neighbour : neighbours) {
             count += getNumberOfUniquePaths(neighbour, end);
         }
@@ -61,18 +59,18 @@ public class Graph {
     @Override
     public boolean equals(Object o) {
         if (!(o instanceof Graph graph)) return false;
-        return Objects.equals(map, graph.map);
+        return Objects.equals(neighboursMap, graph.neighboursMap);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(map);
+        return Objects.hashCode(neighboursMap);
     }
 
     @Override
     public String toString() {
         return "Graph{" +
-                "map=" + map +
+                "map=" + neighboursMap +
                 '}';
     }
 }

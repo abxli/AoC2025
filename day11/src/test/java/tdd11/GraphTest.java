@@ -49,10 +49,10 @@ class GraphTest {
         sut.addEdge(startNode, destinationNode);
         sut.addEdge(startNode, "ccc");
         sut.addEdge("ccc", destinationNode);
-        final int expected = 2;
+        final long expected = 2;
 
         // Act
-        int result = sut.getNumberOfUniquePaths(startNode, destinationNode);
+        long result = sut.getNumberOfUniquePaths(startNode, destinationNode);
 
         // Assert
         assertEquals(expected, result);

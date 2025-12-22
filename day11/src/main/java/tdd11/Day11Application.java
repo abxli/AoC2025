@@ -16,8 +16,7 @@ public class Day11Application {
         String fileName = "day11\\src\\main\\resources\\input.txt";
         List<String> lines = readFileToLines(fileName);
         Graph g = serverNodeParser.parseToGraph(lines);
-        System.out.println(g);
-        int uniquePaths = g.getNumberOfUniquePaths("you", "out");
+        long uniquePaths = g.getNumberOfUniquePaths("you", "out");
         System.out.println("Result for day 11 part 1 = " + uniquePaths);
     }
 
@@ -25,12 +24,10 @@ public class Day11Application {
         String fileName = "day11\\src\\main\\resources\\input.txt";
         List<String> lines = readFileToLines(fileName);
         Graph g = serverNodeParser.parseToGraph(lines);
-//        System.out.println(g);
-        int uniquePaths =
+        long uniquePaths =
                 (g.getNumberOfUniquePaths("svr", "dac") * g.getNumberOfUniquePaths("dac", "fft") * g.getNumberOfUniquePaths("fft", "out"))
                 + (g.getNumberOfUniquePaths("svr", "fft") * g.getNumberOfUniquePaths("fft", "dac") * g.getNumberOfUniquePaths("dac", "out"));
         System.out.println("Result for day 11 part 2 = " + uniquePaths);
-        System.out.println("Result for day 11 part 2 = " + g.getNumberOfUniquePaths("svr", "out"));
     }
 
     public static List<String> readFileToLines(String fileName) {
