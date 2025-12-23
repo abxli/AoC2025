@@ -23,6 +23,7 @@ class Day1ApplicationTest {
 
     @Test
     void testCalculatePart1() {
+        // Arrange
         final int expected = 1043;
 
         // Act
@@ -34,7 +35,8 @@ class Day1ApplicationTest {
 
     @Test
     void testCalculatePart2() {
-        final int expected = 5963; //5772
+        // Arrange
+        final int expected = 5963;
 
         // Act
         int result = Day1Application.calculatePart2();
