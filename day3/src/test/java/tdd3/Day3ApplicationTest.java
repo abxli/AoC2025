@@ -32,4 +32,17 @@ class Day3ApplicationTest {
         // Assert
         assertEquals(expected, result);
     }
+
+    @Test
+    void testCalculatePart2() {
+        // Arrange
+        final String fileName = "C:\\AoC2025\\day3\\src\\test\\resources\\input.txt";
+        final long expected = 3121910778619L;
+
+        // Act
+        long result = Day3Application.calculatePart2(fileName);
+
+        // Assert
+        assertEquals(expected, result);
+    }
 }
