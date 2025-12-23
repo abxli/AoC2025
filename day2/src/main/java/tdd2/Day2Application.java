@@ -14,13 +14,22 @@ public class Day2Application {
     public static void main(String[] args) {
         final String fileName = "C:\\AoC2025\\day2\\src\\main\\resources\\input.txt";
         calculatePart1(fileName);
+        calculatePart2(fileName);
     }
 
     public static long calculatePart1(final String fileName) {
         List<String> stringRanges = readIdRanges(fileName);
         List<Range> ranges = rangeParser.parseRanges(stringRanges);
-        long result = invalidIdCalculator.calculateTotalInvalidIds(ranges);
+        long result = invalidIdCalculator.calculateTotalInvalidIdsForPart1(ranges);
         System.out.println("Result for part 1 is: " + result);
+        return result;
+    }
+
+    public static long calculatePart2(String fileName) {
+        List<String> stringRanges = readIdRanges(fileName);
+        List<Range> ranges = rangeParser.parseRanges(stringRanges);
+        long result = invalidIdCalculator.calculateTotalInvalidIdsForPart2(ranges);
+        System.out.println("Result for part 2 is: " + result);
         return result;
     }
 
