@@ -5,21 +5,60 @@ import java.awt.*;
 import java.util.Set;
 
 public class Forklift {
+    private int removableScrolls = 0;
+
+    public int getRemovableScrolls() {
+        return removableScrolls;
+    }
+
+    public int sumRemovableRolls(String[][] grid) {
+        String[][] newGrid = removeRollsFromGrid(grid);
+        if (areGridsTheSame(grid, newGrid)) return removableScrolls;
+        else return sumRemovableRolls(newGrid);
+    }
+
+    public String[][] removeRollsFromGrid(String[][] grid) {
+        String[][] result = new String[grid.length][grid[0].length];
+        for (int x = 0; x < grid.length; x++) {
+            for (int y = 0; y < grid[0].length; y++) {
+                Point point = new Point(x, y);
+                if (isPointAScroll(point, grid) && isAccessibleRoll(point, grid)) {
+                    result[x][y] = "x";
+                    removableScrolls++;
+                } else {
+                    result[x][y] = grid[x][y];
+                }
+            }
+        }
+        return result;
+    }
+
+    private boolean areGridsTheSame(String[][] grid, String[][] newGrid) {
+        if (grid.length != newGrid.length) return false;
+        for (int x = 0; x < grid.length; x++) {
+            if (grid[x].length != newGrid[x].length) return false;
+            for (int y = 0; y < grid[0].length; y++) {
+                if (!grid[x][y].equals(newGrid[x][y])) return false;
+            }
+        }
+        return true;
+    }
     public int sumAccessibleRolls(String[][] grid) {
         int count = 0;
         for (int x = 0; x < grid.length; x++) {
             for (int y = 0; y < grid[x].length; y++) {
                 Point point = new Point(x, y);
-                if (isPointAScroll(point, grid) && isAccessibleScroll(point, grid)) count++;
+                if (isPointAScroll(point, grid) && isAccessibleRoll(point, grid)) count++;
             }
         }
         return count;
     }
+
     private boolean isPointAScroll(Point point, String[][] grid) {
         return grid[point.x][point.y].equals("@");
     }
 
-    public boolean isAccessibleScroll(Point point, String[][] grid) {
+    public boolean isAccessibleRoll(Point point, String[][] grid) {
         int countAdjacentScrolls = 0;
         Set<Point> coordinates = Set.of(
                 new Point(point.x - 1, point.y), // left

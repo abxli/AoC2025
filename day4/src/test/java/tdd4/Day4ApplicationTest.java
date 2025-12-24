@@ -43,4 +43,17 @@ class Day4ApplicationTest {
         // Assert
         assertEquals(expected, result);
     }
+
+    @Test
+    void testCalculatePart2() {
+        // Arrange
+        final String fileName = "C:\\AoC2025\\day4\\src\\test\\resources\\input.txt";
+        final int expected = 43;
+
+        // Act
+        int result = Day4Application.calculatePart2(fileName);
+
+        // Assert
+        assertEquals(expected, result);
+    }
 }

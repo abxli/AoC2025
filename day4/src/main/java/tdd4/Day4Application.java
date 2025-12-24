@@ -12,6 +12,7 @@ public class Day4Application {
     public static void main(String[] args) {
         final String fileName = "C:\\AoC2025\\day4\\src\\main\\resources\\input.txt";
         calculatePart1(fileName);
+        calculatePart2(fileName);
     }
 
     public static int calculatePart1(String fileName) {
@@ -19,6 +20,14 @@ public class Day4Application {
         String[][] grid = gridParser.parseGrid(lines);
         int count = forklift.sumAccessibleRolls(grid);
         System.out.println("Result for part 1 is: " + count);
+        return count;
+    }
+
+    public static int calculatePart2(String fileName) {
+        List<String> lines = readLines(fileName);
+        String[][] grid = gridParser.parseGrid(lines);
+        int count = forklift.sumRemovableRolls(grid);
+        System.out.println("Result for part 2 is: " + count);
         return count;
     }
 
