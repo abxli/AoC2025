@@ -4,7 +4,7 @@ import java.util.List;
 
 public class InvalidIdCalculator {
     /**
-     * Calculate the total sum of all invalid ids, given a list of ranges. AoC 2025 day 2 part 1.
+     * Calculate the total sum of all invalid ids, given a list of ranges. AoC 2025 day 2 part 2.
      *
      * @param ranges The ranges to check the invalid ids for, as a list.
      *
@@ -17,6 +17,7 @@ public class InvalidIdCalculator {
         }
         return totalSum;
     }
+
     /**
      * Calculate the sum of invalid ids given a range. AoC 2025 day 2 part 2.
      *
