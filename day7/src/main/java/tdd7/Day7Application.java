@@ -14,11 +14,12 @@ public class Day7Application {
         calculatePart1(fileName);
     }
 
-    public static void calculatePart1(String fileName) {
+    public static int calculatePart1(String fileName) {
         List<String> lines = Day7Application.readLines(fileName);
         String[][] grid = gridParser.parseGrid(lines);
         int result = beamSplitter.calculateAmountOfSplitting(grid);
         System.out.println(result);
+        return result;
     }
 
     public static List<String> readLines(String fileName) {

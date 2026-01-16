@@ -37,4 +37,17 @@ class Day7ApplicationTest {
         // Assert
         assertEquals(expected, result);
     }
+
+    @Test
+    void testCalculatePart1() {
+        // Arrange
+        final String fileName = "C:\\AoC2025\\day7\\src\\test\\resources\\result.txt";
+        final int expected = 1640;
+
+        // Act
+        int result = Day7Application.calculatePart1(fileName);
+
+        // Assert
+        assertEquals(expected, result);
+    }
 }

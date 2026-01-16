@@ -1,40 +1,34 @@
 package tdd7;
 
 import java.awt.*;
-import java.util.LinkedList;
 
 public class BeamSplitter {
     public int calculateAmountOfSplitting(String[][] grid) {
         Point start = getStartingPoint(grid);
         if (start == null) return 0;
-        int amountOfSplitting = 0;
 
         boolean[][] visited = new boolean[grid.length][grid[0].length];
-        
-        java.util.Queue<Point> q = new LinkedList<>();
-        q.add(start);
-        
-        while (!q.isEmpty()) {
-            Point currentPoint = q.poll();
-            int currentXPos = currentPoint.x + 1;
-            if (currentXPos >= grid.length) break;
+        return propagate(grid, start.x + 1, start.y, visited);
+    }
 
-            if (grid[currentXPos][currentPoint.y].equals("^")) {
-                if (!visited[currentXPos][currentPoint.y]) {
-                    visited[currentXPos][currentPoint.y] = true;
-                    amountOfSplitting++;
-                    Point leftBeam = new Point(currentXPos + 1, currentPoint.y - 1);
-                    Point rightBeam = new Point(currentXPos + 1, currentPoint.y + 1);
-                    q.add(leftBeam);
-                    q.add(rightBeam);
-                }
+    private int propagate(String[][] grid, int x, int y, boolean[][] visited) {
+        if (x >= grid.length || y < 0 || y >= grid[0].length) return 0;
+        if (visited[x][y]) return 0;
 
-            } else {
-                q.add(new Point(currentXPos, currentPoint.y));
-            }
+        visited[x][y] = true;
+        String currentCell = grid[x][y];
+
+        if (currentCell.equals("^")) {
+            int amountOfSplits = 1;
+            amountOfSplits += propagate(grid, x + 1, y - 1, visited);
+            amountOfSplits += propagate(grid, x + 1, y + 1, visited);
+
+            return amountOfSplits;
+        } else if (currentCell.equals("|") || currentCell.equals(".")) {
+            return propagate(grid, x + 1, y, visited);
         }
-        
-        return amountOfSplitting;
+
+        return 0;
     }
 
     public Point getStartingPoint(String[][] grid) {
