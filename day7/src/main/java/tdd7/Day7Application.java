@@ -12,13 +12,22 @@ public class Day7Application {
     public static void main(String[] args) {
         final String fileName = "C:\\AoC2025\\day7\\src\\main\\resources\\input.txt";
         calculatePart1(fileName);
+        calculatePart2(fileName);
     }
 
     public static int calculatePart1(String fileName) {
         List<String> lines = Day7Application.readLines(fileName);
         String[][] grid = gridParser.parseGrid(lines);
         int result = beamSplitter.calculateAmountOfSplitting(grid);
-        System.out.println(result);
+        System.out.println("Result for day 7 part 1: " + result);
+        return result;
+    }
+
+    public static long calculatePart2(String fileName) {
+        List<String> lines = Day7Application.readLines(fileName);
+        String[][] grid = gridParser.parseGrid(lines);
+        long result = beamSplitter.calculateAmountOfTimelines(grid);
+        System.out.println("Result for day 7 part 2: " + result);
         return result;
     }
 
