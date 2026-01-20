@@ -28,4 +28,17 @@ class FreshIdCalculatorTest {
         // Assert
         assertEquals(expected, result);
     }
+
+    @Test
+    void testCalculateAllFreshIds() {
+        // Arrange
+        final List<Range> freshIdRanges = List.of(new Range(3, 5), new Range(10, 14), new Range(16, 20), new Range(12, 18));
+        final long expected = 14;
+
+        // Act
+        long result = sut.calculateAllFreshIds(freshIdRanges);
+
+        // Assert
+        assertEquals(expected, result);
+    }
 }

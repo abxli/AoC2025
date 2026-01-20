@@ -12,6 +12,7 @@ public class Day5Application {
     public static void main(String[] args) {
         final String fileName = "C:\\AoC2025\\day5\\src\\main\\resources\\input.txt";
         calculatePart1(fileName);
+        calculatePart2(fileName);
     }
 
     public static long calculatePart1(String fileName) {
@@ -19,6 +20,14 @@ public class Day5Application {
         InputTuple tuple = parser.parseTuples(lines);
         long result = freshIdCalculator.calculateNumberOfFreshIds(tuple.freshIdRanges(), tuple.availableIds());
         System.out.println("Number of Fresh Ingredient Ids: " + result);
+        return result;
+    }
+
+    public static long calculatePart2(String fileName) {
+        List<String> lines = readLines(fileName);
+        InputTuple tuple = parser.parseTuples(lines);
+        long result = freshIdCalculator.calculateAllFreshIds(tuple.freshIdRanges());
+        System.out.println("Number of All Fresh Ingredient Ids: " + result);
         return result;
     }
 
